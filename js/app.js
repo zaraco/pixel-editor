@@ -12,6 +12,7 @@ class App {
         this.grid.attachWidthInput(document.getElementById('width'));
         this.grid.attachHeightInput(document.getElementById('height'));
         this.grid.attachDownloadButton(document.getElementById('download'));
+        this.grid.attachResetButton(document.getElementById('reset'));
     }
 
     getSelectedColor = () => {

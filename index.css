@@ -115,3 +115,21 @@ body {
 #download:hover {
     background-color: #1f57ec;
 }
+
+#reset {
+    float: left;
+    margin-top: 20px;
+    margin-left: 200px;
+    height: 33px;
+    color: #fff;
+    background-color: #999999;
+    border: 1px solid #888888;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: 1s;
+    width: 150px;
+}
+
+#reset:hover {
+    background-color: #888888;
+}

@@ -90,6 +90,18 @@ class Grid {
     download = (event) => {
         event.preventDefault();
         window.location.href = this.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    };
+
+    // attach reset button DOM
+    attachResetButton = (resetButton) => {
+        this.resetButton = resetButton;
+        this.resetButton.addEventListener('click', this.reset)
+    };
+
+    // reset button listener
+    reset = (event) => {
+        event.preventDefault();
+        this.generateGrid()
     }
 
 }
