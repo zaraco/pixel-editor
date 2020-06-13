@@ -31,14 +31,3 @@ body {
     border: 1px solid #000;
     margin: 20px 0;
 }
-
-.row {
-    display: flex;
-    text-align: center;
-}
-
-.cell {
-    width: 10px;
-    height: 10px;
-    border: 1px solid black;
-}
