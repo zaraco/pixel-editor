@@ -55,7 +55,7 @@ class Picker {
     };
 
     updateColorBox = () => {
-        this.colorBox.background = this.selectedColor.returnRgba();
+        this.colorBox.style.backgroundColor = this.selectedColor.returnRgba();
         this.colorBox.innerHTML = this.selectedColor.returnHex();
 
     };
@@ -99,6 +99,7 @@ class Picker {
 
 class Grid {
 
+    colors = [];
     width = 16;
     height = 16;
 
@@ -128,13 +129,13 @@ class Grid {
     };
 
     onClick = (event) => {
-
+        // this.colors[event.target.dataset.x][event.target.dataset.y] = this.app.getSelectedColor();
+        event.target.style.backgroundColor = this.app.getSelectedColor().returnRgba();
     };
 
     changeSize = (width, height) => {
         this.width = width;
         this.height = height;
-
         this.generateGrid()
     }
 
