@@ -99,7 +99,6 @@ class Picker {
 
 class Grid {
 
-    colors = [];
     width = 16;
     height = 16;
 
@@ -112,7 +111,33 @@ class Grid {
         this.generateGrid()
     };
 
+    attachWidthInput = (widthInput) => {
+        this.widthInput = widthInput;
+        this.widthInput.value = this.width;
+        this.widthInput.addEventListener('change', this.onWidthChange);
+    };
+
+    attachHeightInput = (heightInput) => {
+        this.heightInput = heightInput;
+        this.heightInput.value = this.width;
+        this.heightInput.addEventListener('change', this.onHeightChange);
+    };
+
+    onWidthChange = (event) => {
+        this.width = parseInt(event.target.value);
+        this.generateGrid();
+    };
+
+    onHeightChange = (event) => {
+        this.height = parseInt(event.target.value);
+        this.generateGrid();
+    };
+
     generateGrid = () => {
+        this.colors = new Array(this.width);
+        for (let i = 0; i < this.colors.length; i++) {
+            this.colors[i] = new Array(this.height);
+        }
         let s = '';
         for (let j = 0; j < this.height; j++) {
             s += '<div class="row">';
@@ -129,15 +154,9 @@ class Grid {
     };
 
     onClick = (event) => {
-        // this.colors[event.target.dataset.x][event.target.dataset.y] = this.app.getSelectedColor();
+        this.colors[event.target.dataset.x][event.target.dataset.y] = this.app.getSelectedColor();
         event.target.style.backgroundColor = this.app.getSelectedColor().returnRgba();
     };
-
-    changeSize = (width, height) => {
-        this.width = width;
-        this.height = height;
-        this.generateGrid()
-    }
 
 }
 
@@ -148,15 +167,17 @@ class App {
         this.picker.attachCanvas(document.getElementById('picker'));
         this.picker.attachColorBox(document.getElementById('color-box'));
         this.grid.attachGrid(document.getElementById('grid'));
+        this.grid.attachWidthInput(document.getElementById('width'));
+        this.grid.attachHeightInput(document.getElementById('height'));
     }
 
     getSelectedColor = () => {
         return this.picker.selectedColor
-    }
+    };
 
     getGridColors = () => {
         return this.grid.colors
-    }
+    };
 }
 
 const app = new App();
