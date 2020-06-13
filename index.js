@@ -91,14 +91,57 @@ class Picker {
         for (let i = 0; i < colors.length; i++) {
             gradient.addColorStop((i / (colors.length - 1)), colors[i].returnRgba());
         }
-        this.canvasContext.fillStyle = gradient
-        this.canvasContext.fillRect(0, 0, this.canvas.width, this.canvas.height)
+        this.canvasContext.fillStyle = gradient;
+        this.canvasContext.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
+}
+
+class Grid {
+
+    width = 16;
+    height = 16;
+
+    constructor() {
+    }
+
+    attachGrid = (grid) => {
+        this.grid = grid;
+        this.generateGrid()
+    };
+
+    generateGrid = () => {
+        let s = '';
+        for (let j = 0; j < this.height; j++) {
+            s += '<div class="row">';
+            for (let i = 0; i < this.width; i++) {
+                s += `<div class="cell" data-x="${i}" data-y="${j}"></div>`;
+            }
+            s += '</div>';
+        }
+        this.grid.innerHTML = s;
+        let elements = document.getElementsByClassName('cell');
+        Array.from(elements).forEach((element) => {
+            element.addEventListener('click', this.onClick);
+        });
+    };
+
+    onClick = (event) => {
+
+    };
+
+    changeSize = (width, height) => {
+        this.width = width;
+        this.height = height;
+        this.generateGrid()
+    }
+
 
 }
 
 
 const picker = new Picker();
+const grid = new Grid();
 picker.attachCanvas(document.getElementById('picker'));
 picker.attachColorBox(document.getElementById('color-box'));
+grid.attachGrid(document.getElementById('grid'));
 
