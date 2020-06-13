@@ -167,11 +167,14 @@ class Grid {
             this.cellWidth(), this.cellHeight());
     };
 
-    download = () => {
-        let link = document.createElement('image');
-        link.download = 'image.png';
-        link.href = this.canvas.toDataURL();
-        link.click();
+    attachDownloadButton = (downloadButton) => {
+        this.downloadButton = downloadButton;
+        this.downloadButton.addEventListener('click', this.download)
+    };
+
+    download = (event) => {
+        event.preventDefault();
+        window.location.href = this.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
     }
 
 }
@@ -185,6 +188,7 @@ class App {
         this.grid.attachCanvas(document.getElementById('grid'));
         this.grid.attachWidthInput(document.getElementById('width'));
         this.grid.attachHeightInput(document.getElementById('height'));
+        this.grid.attachDownloadButton(document.getElementById('download'));
     }
 
     getSelectedColor = () => {
