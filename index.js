@@ -6,30 +6,57 @@ class Color {
         this.alpha = alpha;
     }
 
-    returnColor = () => {
-        return `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`
+    update(red, green, blue, alpha) {
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+        this.alpha = alpha;
     }
+
+    returnRgba = () => {
+        return `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`;
+    };
+
+    returnHex = () => {
+        return '#' + [this.red, this.green, this.blue].map(x => {
+            const hex = x.toString(16);
+            return hex.length === 1 ? '0' + hex : hex
+        }).join('')
+    };
+
 }
 
 class Picker {
 
-    selectedColor = new Color(255,255,255,1);
+    selectedColor = new Color(255, 255, 255, 1);
 
     constructor() {
     }
 
-    attachDom = (canvas) => {
+    attachCanvas = (canvas) => {
         this.canvas = canvas;
         this.canvasContext = canvas.getContext('2d');
         this.generatePicker();
         canvas.addEventListener("click", this.onClick)
     };
 
+    attachColorBox = (colorBox) => {
+        this.colorBox = colorBox;
+        this.updateColorBox()
+    };
+
     onClick = (e) => {
         let xPosition = (e.offsetX / this.canvas.clientWidth) * this.canvas.width;
         let yPosition = (e.offsetY / this.canvas.clientHeight) * this.canvas.height;
         let imageData = this.canvasContext.getImageData(xPosition, yPosition, 1, 1);
-        this.selectedColor = new Color(imageData.data[0], imageData.data[1],imageData.data[2],imageData.data[3]);
+        this.selectedColor.update(imageData.data[0], imageData.data[1], imageData.data[2], imageData.data[3] / 255);
+        this.updateColorBox()
+    };
+
+    updateColorBox = () => {
+        this.colorBox.background = this.selectedColor.returnRgba();
+        this.colorBox.innerHTML = this.selectedColor.returnHex();
+
     };
 
     generatePicker = () => {
@@ -61,17 +88,17 @@ class Picker {
 
     generateGradient = (colors, x0, y0, x1, y1) => {
         let gradient = this.canvasContext.createLinearGradient(x0, y0, x1, y1);
-        for(let i=0; i<colors.length; i++) {
-            gradient.addColorStop((i/(colors.length-1)), colors[i].returnColor());
+        for (let i = 0; i < colors.length; i++) {
+            gradient.addColorStop((i / (colors.length - 1)), colors[i].returnRgba());
         }
         this.canvasContext.fillStyle = gradient
         this.canvasContext.fillRect(0, 0, this.canvas.width, this.canvas.height)
     }
 
-
-
 }
 
+
 const picker = new Picker();
-picker.attachDom(document.getElementById('picker'));
+picker.attachCanvas(document.getElementById('picker'));
+picker.attachColorBox(document.getElementById('color-box'));
 

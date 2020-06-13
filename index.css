@@ -3,3 +3,8 @@
     width: 200px;
     background-color: #999;
 }
+#color-box {
+    height: 50px;
+    width: 100px;
+    border: 1px solid #000;
+}
