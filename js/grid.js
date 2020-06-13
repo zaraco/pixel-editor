@@ -15,6 +15,9 @@ class Grid {
         this.canvas = canvas;
         this.canvasContext = canvas.getContext("2d");
         this.canvas.addEventListener('click', this.onClick);
+        this.canvas.addEventListener("mousedown", this.onMouseDown);
+        this.canvas.addEventListener("mouseup", this.onMouseUp);
+        this.canvas.addEventListener("mousemove", this.onMouseMove);
         this.generateGrid()
     };
 
@@ -78,6 +81,21 @@ class Grid {
         this.canvasContext.fillRect(Math.floor(event.offsetX/this.cellWidth())*this.cellWidth(),
             Math.floor(event.offsetY/this.cellHeight())*this.cellHeight(),
             this.cellWidth(), this.cellHeight());
+    };
+
+    // mouse down listener of the painting canvas
+    onMouseDown = (e) => {
+        this.isMouseDown = true;
+    };
+
+    // mouse down listener of the painting canvas
+    onMouseUp = (e) => {
+        this.isMouseDown = false;
+    };
+
+    // mouse move listener of the painting canvas
+    onMouseMove = (e) => {
+        if (this.isMouseDown) this.onClick(e);
     };
 
     // attach download button DOM

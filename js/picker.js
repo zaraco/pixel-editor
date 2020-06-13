@@ -14,7 +14,10 @@ class Picker {
         this.canvas = canvas;
         this.canvasContext = canvas.getContext('2d');
         this.generatePicker();
-        canvas.addEventListener("click", this.onClick)
+        canvas.addEventListener("click", this.onClick);
+        canvas.addEventListener("mousedown", this.onMouseDown);
+        canvas.addEventListener("mouseup", this.onMouseUp);
+        canvas.addEventListener("mousemove", this.onMouseMove);
     };
 
     // attach selected color box DOM
@@ -30,6 +33,21 @@ class Picker {
         let imageData = this.canvasContext.getImageData(xPosition, yPosition, 1, 1);
         this.selectedColor.update(imageData.data[0], imageData.data[1], imageData.data[2], imageData.data[3] / 255);
         this.updateColorBox()
+    };
+
+    // mouse down listener of the picker slider
+    onMouseDown = (e) => {
+        this.isMouseDown = true;
+    };
+
+    // mouse down listener of the picker slider
+    onMouseUp = (e) => {
+        this.isMouseDown = false;
+    };
+
+    // mouse move listener of the picker slider
+    onMouseMove = (e) => {
+        if (this.isMouseDown) this.onClick(e);
     };
 
     // change selected color in DOM
