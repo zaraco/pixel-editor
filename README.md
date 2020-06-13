@@ -11,7 +11,7 @@ It is a simple javascript app for painting, with the features:
 
 OR
 
-- see the online version here: http://zaraco.com/samples/pixel-editor
+- see the online version here: http://zara-co.com/samples/pixel-editor
 
 ## Info
 
