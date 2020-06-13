@@ -14,10 +14,10 @@ class Picker {
         this.canvas = canvas;
         this.canvasContext = canvas.getContext('2d');
         this.generatePicker();
-        canvas.addEventListener("click", this.onClick);
-        canvas.addEventListener("mousedown", this.onMouseDown);
-        canvas.addEventListener("mouseup", this.onMouseUp);
-        canvas.addEventListener("mousemove", this.onMouseMove);
+        this.canvas.addEventListener("click", this.onClick);
+        this.canvas.addEventListener("mousedown", this.onMouseDown);
+        this.canvas.addEventListener("mouseup", this.onMouseUp);
+        this.canvas.addEventListener("mousemove", this.onMouseMove);
     };
 
     // attach selected color box DOM

@@ -63,6 +63,7 @@ body {
 .grid-container {
     float: right;
     width: 700px;
+    padding-top: 5px;
     -webkit-box-shadow: 0 0 10px 3px rgba(238,238,238,1);
     -moz-box-shadow: 0 0 10px 3px rgba(238,238,238,1);
     box-shadow: 0 0 10px 3px rgba(238,238,238,1);
@@ -113,7 +114,7 @@ body {
 }
 
 #download:hover {
-    background-color: #1f57ec;
+    background-color: #5f7bff;
 }
 
 #reset {
@@ -122,8 +123,8 @@ body {
     margin-left: 200px;
     height: 33px;
     color: #fff;
-    background-color: #999999;
-    border: 1px solid #888888;
+    background-color: #222222;
+    border: 1px solid #111111;
     cursor: pointer;
     border-radius: 3px;
     transition: 1s;
@@ -131,5 +132,5 @@ body {
 }
 
 #reset:hover {
-    background-color: #888888;
+    background-color: #444444;
 }
