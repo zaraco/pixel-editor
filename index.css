@@ -1,13 +1,35 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+#picker-container {
+    width: 20%;
+    float: left;
+}
+
+#grid-container {
+    width: 80%;
+    float: left;
+}
+
 #picker {
     height: 600px;
-    width: 200px;
+    width: 80%;
     background-color: #999;
+    margin: auto;
 }
 
 #color-box {
     height: 50px;
-    width: 100px;
+    width: 80%;
     border: 1px solid #000;
+    margin: 20px 0;
 }
 
 .row {
@@ -18,6 +40,5 @@
 .cell {
     width: 10px;
     height: 10px;
-    margin: 1px;
     border: 1px solid black;
 }

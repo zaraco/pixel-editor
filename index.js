@@ -158,6 +158,13 @@ class Grid {
         event.target.style.backgroundColor = this.app.getSelectedColor().returnRgba();
     };
 
+    download = () => {
+        let link = document.createElement('image');
+        link.download = 'image.png';
+        link.href = this.grid.toDataURL();
+        link.click();
+    }
+
 }
 
 class App {
