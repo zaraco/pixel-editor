@@ -1,3 +1,4 @@
+// RGB (+alpha) color class
 class Color {
     constructor(red, green, blue, alpha) {
         this.red = red;
@@ -13,10 +14,12 @@ class Color {
         this.alpha = alpha;
     }
 
+    // returns Rgba color
     returnRgba = () => {
         return `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`;
     };
 
+    // returns Hex color
     returnHex = () => {
         return '#' + [this.red, this.green, this.blue].map(x => {
             const hex = x.toString(16);

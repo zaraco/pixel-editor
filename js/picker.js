@@ -1,11 +1,15 @@
+// picker slider component
 class Picker {
 
+    // initial selected color
     selectedColor = new Color(0, 200, 255, 1);
 
+    // init picker slider component
     constructor(app) {
         this.app = app
     }
 
+    // attach picker slider canvas DOM
     attachCanvas = (canvas) => {
         this.canvas = canvas;
         this.canvasContext = canvas.getContext('2d');
@@ -13,11 +17,13 @@ class Picker {
         canvas.addEventListener("click", this.onClick)
     };
 
+    // attach selected color box DOM
     attachColorBox = (colorBox) => {
         this.colorBox = colorBox;
         this.updateColorBox()
     };
 
+    // click listener of the picker slider
     onClick = (e) => {
         let xPosition = (e.offsetX / this.canvas.clientWidth) * this.canvas.width;
         let yPosition = (e.offsetY / this.canvas.clientHeight) * this.canvas.height;
@@ -26,12 +32,14 @@ class Picker {
         this.updateColorBox()
     };
 
+    // change selected color in DOM
     updateColorBox = () => {
         this.colorBox.style.backgroundColor = this.selectedColor.returnRgba();
         this.colorBox.innerHTML = this.selectedColor.returnHex();
 
     };
 
+    // create the wide RGB color in picker slider canvas
     generatePicker = () => {
         let mainColors = [
             new Color(255, 0, 0, 1),
@@ -59,6 +67,7 @@ class Picker {
         this.generateGradient(darkColors, 0, 0, this.canvas.width, 0);
     };
 
+    // create a gradient (useful for creating the picker slider wide RGB colors)
     generateGradient = (colors, x0, y0, x1, y1) => {
         let gradient = this.canvasContext.createLinearGradient(x0, y0, x1, y1);
         for (let i = 0; i < colors.length; i++) {

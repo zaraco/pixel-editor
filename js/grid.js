@@ -1,12 +1,16 @@
+// painting grid component
 class Grid {
 
+    // initial size of the grid
     width = 16;
     height = 16;
 
+    // init painting grid
     constructor(app) {
         this.app = app
     }
 
+    // attach painting canvas DOM
     attachCanvas = (canvas) => {
         this.canvas = canvas;
         this.canvasContext = canvas.getContext("2d");
@@ -14,28 +18,33 @@ class Grid {
         this.generateGrid()
     };
 
+    // attach width input DOM
     attachWidthInput = (widthInput) => {
         this.widthInput = widthInput;
         this.widthInput.value = this.width;
         this.widthInput.addEventListener('change', this.onWidthChange);
     };
 
+    // attach height input DOM
     attachHeightInput = (heightInput) => {
         this.heightInput = heightInput;
         this.heightInput.value = this.width;
         this.heightInput.addEventListener('change', this.onHeightChange);
     };
 
+    // width input change listener
     onWidthChange = (event) => {
         this.width = parseInt(event.target.value);
         this.generateGrid();
     };
 
+    // height input change listener
     onHeightChange = (event) => {
         this.height = parseInt(event.target.value);
         this.generateGrid();
     };
 
+    // generate the painting grid canvas based on the width and height sizes
     generateGrid = () => {
         this.canvasContext.beginPath();
         this.canvasContext.fillStyle = "white";
@@ -53,14 +62,17 @@ class Grid {
         this.canvasContext.closePath();
     };
 
+    // calculates each cell height
     cellHeight = () => {
         return this.canvas.height / this.height
     };
 
+    // calculates each cell width
     cellWidth = () => {
         return this.canvas.width / this.width
     };
 
+    // painting canvas click listener
     onClick = (event) => {
         this.canvasContext.fillStyle = this.app.getSelectedColor().returnRgba();
         this.canvasContext.fillRect(Math.floor(event.offsetX/this.cellWidth())*this.cellWidth(),
@@ -68,11 +80,13 @@ class Grid {
             this.cellWidth(), this.cellHeight());
     };
 
+    // attach download button DOM
     attachDownloadButton = (downloadButton) => {
         this.downloadButton = downloadButton;
         this.downloadButton.addEventListener('click', this.download)
     };
 
+    // download button listener
     download = (event) => {
         event.preventDefault();
         window.location.href = this.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
