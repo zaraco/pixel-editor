@@ -30,7 +30,8 @@ class Picker {
 
     selectedColor = new Color(255, 255, 255, 1);
 
-    constructor() {
+    constructor(app) {
+        this.app = app
     }
 
     attachCanvas = (canvas) => {
@@ -101,7 +102,8 @@ class Grid {
     width = 16;
     height = 16;
 
-    constructor() {
+    constructor(app) {
+        this.app = app
     }
 
     attachGrid = (grid) => {
@@ -132,16 +134,28 @@ class Grid {
     changeSize = (width, height) => {
         this.width = width;
         this.height = height;
+
         this.generateGrid()
     }
 
-
 }
 
+class App {
+    constructor() {
+        this.picker = new Picker(this);
+        this.grid = new Grid(this);
+        this.picker.attachCanvas(document.getElementById('picker'));
+        this.picker.attachColorBox(document.getElementById('color-box'));
+        this.grid.attachGrid(document.getElementById('grid'));
+    }
 
-const picker = new Picker();
-const grid = new Grid();
-picker.attachCanvas(document.getElementById('picker'));
-picker.attachColorBox(document.getElementById('color-box'));
-grid.attachGrid(document.getElementById('grid'));
+    getSelectedColor = () => {
+        return this.picker.selectedColor
+    }
 
+    getGridColors = () => {
+        return this.grid.colors
+    }
+}
+
+const app = new App();
