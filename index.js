@@ -106,8 +106,10 @@ class Grid {
         this.app = app
     }
 
-    attachGrid = (grid) => {
-        this.grid = grid;
+    attachCanvas = (canvas) => {
+        this.canvas = canvas;
+        this.canvasContext = canvas.getContext("2d");
+        this.canvas.addEventListener('click', this.onClick);
         this.generateGrid()
     };
 
@@ -134,34 +136,41 @@ class Grid {
     };
 
     generateGrid = () => {
-        this.colors = new Array(this.width);
-        for (let i = 0; i < this.colors.length; i++) {
-            this.colors[i] = new Array(this.height);
-        }
-        let s = '';
-        for (let j = 0; j < this.height; j++) {
-            s += '<div class="row">';
-            for (let i = 0; i < this.width; i++) {
-                s += `<div class="cell" data-x="${i}" data-y="${j}"></div>`;
+        this.canvasContext.beginPath();
+        this.canvasContext.fillStyle = "white";
+        this.canvasContext.lineWidth = 1;
+        this.canvasContext.strokeStyle = 'black';
+        for (let row = 0; row < this.height; row++) {
+            for (let column = 0; column < this.width; column++) {
+                let x = column * this.cellWidth();
+                let y = row * this.cellHeight();
+                this.canvasContext.rect(x, y, this.cellWidth(), this.cellHeight());
+                this.canvasContext.fill();
+                this.canvasContext.stroke();
             }
-            s += '</div>';
         }
-        this.grid.innerHTML = s;
-        let elements = document.getElementsByClassName('cell');
-        Array.from(elements).forEach((element) => {
-            element.addEventListener('click', this.onClick);
-        });
+        this.canvasContext.closePath();
+    };
+
+    cellHeight = () => {
+        return this.canvas.height / this.height
+    };
+
+    cellWidth = () => {
+        return this.canvas.width / this.width
     };
 
     onClick = (event) => {
-        this.colors[event.target.dataset.x][event.target.dataset.y] = this.app.getSelectedColor();
-        event.target.style.backgroundColor = this.app.getSelectedColor().returnRgba();
+        this.canvasContext.fillStyle = this.app.getSelectedColor().returnRgba();
+        this.canvasContext.fillRect(Math.floor(event.offsetX/this.cellWidth())*this.cellWidth(),
+            Math.floor(event.offsetY/this.cellHeight())*this.cellHeight(),
+            this.cellWidth(), this.cellHeight());
     };
 
     download = () => {
         let link = document.createElement('image');
         link.download = 'image.png';
-        link.href = this.grid.toDataURL();
+        link.href = this.canvas.toDataURL();
         link.click();
     }
 
@@ -173,17 +182,13 @@ class App {
         this.grid = new Grid(this);
         this.picker.attachCanvas(document.getElementById('picker'));
         this.picker.attachColorBox(document.getElementById('color-box'));
-        this.grid.attachGrid(document.getElementById('grid'));
+        this.grid.attachCanvas(document.getElementById('grid'));
         this.grid.attachWidthInput(document.getElementById('width'));
         this.grid.attachHeightInput(document.getElementById('height'));
     }
 
     getSelectedColor = () => {
         return this.picker.selectedColor
-    };
-
-    getGridColors = () => {
-        return this.grid.colors
     };
 }
 
