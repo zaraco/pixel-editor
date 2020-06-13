@@ -3,31 +3,115 @@ body {
     margin: 0;
 }
 
-#container {
-    max-width: 1000px;
+.navigation {
+    background-color: #f6f9ff;
+    height: 50px;
+}
+
+.navigation .container {
+    padding-top: 10px;
+}
+
+.navigation h1 {
+    margin: 0;
+    padding: 0;
+    color: #2d67ff;
+    font-size: 20px;
+}
+
+.container {
+    max-width: 900px;
     margin: auto;
 }
 
-#picker-container {
-    width: 20%;
-    float: left;
+.container .header {
+    clear: both;
 }
 
-#grid-container {
-    width: 80%;
+.container .main {
+    clear: both;
+}
+
+.container .footer {
+    clear: both;
+}
+
+.picker-container {
     float: left;
 }
 
 #picker {
     height: 600px;
-    width: 80%;
+    width: 40px;
     background-color: #999;
-    margin: auto;
+    border-radius: 50px;
+    margin-left: 30px;
 }
 
 #color-box {
-    height: 50px;
-    width: 80%;
-    border: 1px solid #000;
+    height: 35px;
+    width: 100px;
     margin: 20px 0;
+    color: #fff;
+    float: left;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-container {
+    float: right;
+    width: 700px;
+    -webkit-box-shadow: 0 0 10px 3px rgba(238,238,238,1);
+    -moz-box-shadow: 0 0 10px 3px rgba(238,238,238,1);
+    box-shadow: 0 0 10px 3px rgba(238,238,238,1);
+}
+
+#grid {
+    margin-left: 50px;
+    height: 600px;
+    width: 600px;
+}
+
+.inputs-container {
+    margin-left: 100px;
+    float: left;
+
+}
+
+.inputs-container span {
+    margin-left: 20px;
+    color: #999999;
+}
+
+#width, #height {
+    margin-top: 20px;
+    height: 30px;
+    border-radius: 3px;
+    border: 1px solid #cccccc;
+    text-align: center;
+    width: 60px;
+    margin-left: 5px;
+}
+
+.label {
+    margin-left: 20px;
+}
+
+#download {
+    float: right;
+    margin-top: 20px;
+    height: 33px;
+    color: #fff;
+    background-color: #2d67ff;
+    border: 1px solid #1f57ec;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: 1s;
+    width: 150px;
+}
+
+#download:hover {
+    background-color: #1f57ec;
 }

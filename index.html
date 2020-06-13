@@ -4,17 +4,30 @@
     <meta charset="UTF-8">
     <title>Pixel Editor</title>
     <link rel="stylesheet" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<div id="container">
-    <div id="picker-container">
+<div class="navigation">
+    <div class="container"><h1>Pixel Editor</h1></div>
+</div>
+<div class="container">
+    <div class="header">
         <div id="color-box"></div>
-        <canvas id="picker"></canvas>
+        <div class="inputs-container">
+            <label for="width" class="label"></label><input id="width" type="number">
+            <span>x</span>
+            <label for="height" class="label"></label><input id="height" type="number">
+        </div>
     </div>
-    <div id="grid-container">
-        <label for="width"></label><input id="width" type="number">
-        <label for="height"></label><input id="height" type="number">
-        <canvas id="grid"></canvas>
+    <div class="main">
+        <div class="picker-container">
+            <canvas id="picker" width="40" height="600"></canvas>
+        </div>
+        <div class="grid-container">
+            <canvas id="grid" width="600" height="600"></canvas>
+        </div>
+    </div>
+    <div class="footer">
         <button type="button" id="download">Download</button>
     </div>
 </div>

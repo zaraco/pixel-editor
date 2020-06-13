@@ -40,7 +40,7 @@ class Grid {
         this.canvasContext.beginPath();
         this.canvasContext.fillStyle = "white";
         this.canvasContext.lineWidth = 1;
-        this.canvasContext.strokeStyle = 'black';
+        this.canvasContext.strokeStyle = '#eee';
         for (let row = 0; row < this.height; row++) {
             for (let column = 0; column < this.width; column++) {
                 let x = column * this.cellWidth();

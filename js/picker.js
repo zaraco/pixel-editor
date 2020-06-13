@@ -1,6 +1,6 @@
 class Picker {
 
-    selectedColor = new Color(255, 255, 255, 1);
+    selectedColor = new Color(0, 200, 255, 1);
 
     constructor(app) {
         this.app = app
