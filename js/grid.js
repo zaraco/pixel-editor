@@ -31,7 +31,7 @@ class Grid {
     // attach height input DOM
     attachHeightInput = (heightInput) => {
         this.heightInput = heightInput;
-        this.heightInput.value = this.width;
+        this.heightInput.value = this.height;
         this.heightInput.addEventListener('change', this.onHeightChange);
     };
 
